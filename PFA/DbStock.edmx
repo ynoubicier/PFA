@@ -1,0 +1,990 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProjetPFAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="code_Categorie" />
+          </Key>
+          <Property Name="code_Categorie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_Categorie" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="code_Client" />
+          </Key>
+          <Property Name="code_Client" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_Clt" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lieuNaissance_Clt" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="adresse" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="adresseMail_Clt" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="paysResidence_Clt" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="telephone_Clt" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommandeClient">
+          <Key>
+            <PropertyRef Name="code_Commande_Client" />
+          </Key>
+          <Property Name="code_Commande_Client" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code_Client" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Entree">
+          <Key>
+            <PropertyRef Name="code_Entree" />
+          </Key>
+          <Property Name="code_Entree" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code_Produit" Type="int" Nullable="false" />
+          <Property Name="code_Stock" Type="int" Nullable="false" />
+          <Property Name="code_Fournisseur" Type="int" Nullable="false" />
+          <Property Name="nom_Entree" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="qte_Entree" Type="int" Nullable="false" />
+          <Property Name="total" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EtatStock">
+          <Key>
+            <PropertyRef Name="code_Stock" />
+          </Key>
+          <Property Name="code_Stock" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code_Entree" Type="int" Nullable="false" />
+          <Property Name="code_Sortie" Type="int" Nullable="false" />
+          <Property Name="code_Produit" Type="int" Nullable="false" />
+          <Property Name="qteEnStock" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Facture">
+          <Key>
+            <PropertyRef Name="code_Facture" />
+          </Key>
+          <Property Name="code_Facture" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code_Client" Type="int" Nullable="false" />
+          <Property Name="date_Facture" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="retenue" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fournisseur">
+          <Key>
+            <PropertyRef Name="code_Fournisseur" />
+          </Key>
+          <Property Name="code_Fournisseur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_Fournisseur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="prenom_Fournisseur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="adresse_Fournisseur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pays_Fournisseur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="telephone_Founisseur" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ligne_Entree">
+          <Key>
+            <PropertyRef Name="code_Ligne_Entree" />
+          </Key>
+          <Property Name="code_Ligne_Entree" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ligne_Facture">
+          <Key>
+            <PropertyRef Name="code_Facture" />
+            <PropertyRef Name="code_Produit" />
+          </Key>
+          <Property Name="code_Facture" Type="bigint" Nullable="false" />
+          <Property Name="code_Produit" Type="int" Nullable="false" />
+          <Property Name="quantite" Type="int" />
+        </EntityType>
+        <EntityType Name="Ligne_Sortie">
+          <Key>
+            <PropertyRef Name="code_Sortie" />
+            <PropertyRef Name="code_Produit" />
+          </Key>
+          <Property Name="code_Sortie" Type="int" Nullable="false" />
+          <Property Name="code_Produit" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produit">
+          <Key>
+            <PropertyRef Name="code_Produit" />
+          </Key>
+          <Property Name="code_Produit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code_Fournisseur" Type="int" Nullable="false" />
+          <Property Name="code_Categorie" Type="int" Nullable="false" />
+          <Property Name="nom_Produit" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="prixUnitaire" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="qteEnStock" Type="int" Nullable="false" />
+          <Property Name="image_Produit" Type="image" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sortie">
+          <Key>
+            <PropertyRef Name="code_Sortie" />
+          </Key>
+          <Property Name="code_Sortie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code_Client" Type="int" Nullable="false" />
+          <Property Name="code_Produit" Type="int" Nullable="false" />
+          <Property Name="date_Commande" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="total_HT" Type="int" Nullable="false" />
+          <Property Name="TVA" Type="float" Nullable="false" />
+          <Property Name="total_TTC" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="code_Utilisateur" />
+          </Key>
+          <Property Name="code_Utilisateur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prenom_Utilisateur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nom_Utilisateur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateNaissance_Utilisateur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lieuNaissance_Utilisateur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nationalite_Utilisateur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="numero_CNI" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pays_Utilisateur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="quartier_Utilisateur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="telephone_Utilisateur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="username_Utilisateur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password_Utilisateur" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CommandeClient_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="CommandeClient" Type="Self.CommandeClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="code_Client" />
+            </Principal>
+            <Dependent Role="CommandeClient">
+              <PropertyRef Name="code_Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entree_EtatStock">
+          <End Role="EtatStock" Type="Self.EtatStock" Multiplicity="1" />
+          <End Role="Entree" Type="Self.Entree" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EtatStock">
+              <PropertyRef Name="code_Stock" />
+            </Principal>
+            <Dependent Role="Entree">
+              <PropertyRef Name="code_Stock" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entree_Fournisseur">
+          <End Role="Fournisseur" Type="Self.Fournisseur" Multiplicity="1" />
+          <End Role="Entree" Type="Self.Entree" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fournisseur">
+              <PropertyRef Name="code_Fournisseur" />
+            </Principal>
+            <Dependent Role="Entree">
+              <PropertyRef Name="code_Fournisseur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entree_Produit">
+          <End Role="Produit" Type="Self.Produit" Multiplicity="1" />
+          <End Role="Entree" Type="Self.Entree" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="code_Produit" />
+            </Principal>
+            <Dependent Role="Entree">
+              <PropertyRef Name="code_Produit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EtatStock_Entree">
+          <End Role="Entree" Type="Self.Entree" Multiplicity="1" />
+          <End Role="EtatStock" Type="Self.EtatStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entree">
+              <PropertyRef Name="code_Entree" />
+            </Principal>
+            <Dependent Role="EtatStock">
+              <PropertyRef Name="code_Entree" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EtatStock_Produit">
+          <End Role="Produit" Type="Self.Produit" Multiplicity="1" />
+          <End Role="EtatStock" Type="Self.EtatStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="code_Produit" />
+            </Principal>
+            <Dependent Role="EtatStock">
+              <PropertyRef Name="code_Produit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EtatStock_Sortie">
+          <End Role="Sortie" Type="Self.Sortie" Multiplicity="1" />
+          <End Role="EtatStock" Type="Self.EtatStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sortie">
+              <PropertyRef Name="code_Sortie" />
+            </Principal>
+            <Dependent Role="EtatStock">
+              <PropertyRef Name="code_Sortie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facture_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Facture" Type="Self.Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="code_Client" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="code_Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ligne_Facture_Facture">
+          <End Role="Facture" Type="Self.Facture" Multiplicity="1" />
+          <End Role="Ligne_Facture" Type="Self.Ligne_Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facture">
+              <PropertyRef Name="code_Facture" />
+            </Principal>
+            <Dependent Role="Ligne_Facture">
+              <PropertyRef Name="code_Facture" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ligne_Facture_Produit">
+          <End Role="Produit" Type="Self.Produit" Multiplicity="1" />
+          <End Role="Ligne_Facture" Type="Self.Ligne_Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="code_Produit" />
+            </Principal>
+            <Dependent Role="Ligne_Facture">
+              <PropertyRef Name="code_Produit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ligne_Sortie_Produit">
+          <End Role="Produit" Type="Self.Produit" Multiplicity="1" />
+          <End Role="Ligne_Sortie" Type="Self.Ligne_Sortie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="code_Produit" />
+            </Principal>
+            <Dependent Role="Ligne_Sortie">
+              <PropertyRef Name="code_Produit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ligne_Sortie_Sortie">
+          <End Role="Sortie" Type="Self.Sortie" Multiplicity="1" />
+          <End Role="Ligne_Sortie" Type="Self.Ligne_Sortie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sortie">
+              <PropertyRef Name="code_Sortie" />
+            </Principal>
+            <Dependent Role="Ligne_Sortie">
+              <PropertyRef Name="code_Sortie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produit_Categorie">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="code_Categorie" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="code_Categorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produit_Fournisseur">
+          <End Role="Fournisseur" Type="Self.Fournisseur" Multiplicity="1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fournisseur">
+              <PropertyRef Name="code_Fournisseur" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="code_Fournisseur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sortie_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Sortie" Type="Self.Sortie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="code_Client" />
+            </Principal>
+            <Dependent Role="Sortie">
+              <PropertyRef Name="code_Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sortie_Produit">
+          <End Role="Produit" Type="Self.Produit" Multiplicity="1" />
+          <End Role="Sortie" Type="Self.Sortie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="code_Produit" />
+            </Principal>
+            <Dependent Role="Sortie">
+              <PropertyRef Name="code_Produit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjetPFAModelStoreContainer">
+          <EntitySet Name="Categorie" EntityType="Self.Categorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommandeClient" EntityType="Self.CommandeClient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entree" EntityType="Self.Entree" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EtatStock" EntityType="Self.EtatStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facture" EntityType="Self.Facture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fournisseur" EntityType="Self.Fournisseur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ligne_Entree" EntityType="Self.Ligne_Entree" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ligne_Facture" EntityType="Self.Ligne_Facture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ligne_Sortie" EntityType="Self.Ligne_Sortie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produit" EntityType="Self.Produit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sortie" EntityType="Self.Sortie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utilisateur" EntityType="Self.Utilisateur" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CommandeClient_Client" Association="Self.FK_CommandeClient_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="CommandeClient" EntitySet="CommandeClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entree_EtatStock" Association="Self.FK_Entree_EtatStock">
+            <End Role="EtatStock" EntitySet="EtatStock" />
+            <End Role="Entree" EntitySet="Entree" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entree_Fournisseur" Association="Self.FK_Entree_Fournisseur">
+            <End Role="Fournisseur" EntitySet="Fournisseur" />
+            <End Role="Entree" EntitySet="Entree" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entree_Produit" Association="Self.FK_Entree_Produit">
+            <End Role="Produit" EntitySet="Produit" />
+            <End Role="Entree" EntitySet="Entree" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EtatStock_Entree" Association="Self.FK_EtatStock_Entree">
+            <End Role="Entree" EntitySet="Entree" />
+            <End Role="EtatStock" EntitySet="EtatStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EtatStock_Produit" Association="Self.FK_EtatStock_Produit">
+            <End Role="Produit" EntitySet="Produit" />
+            <End Role="EtatStock" EntitySet="EtatStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EtatStock_Sortie" Association="Self.FK_EtatStock_Sortie">
+            <End Role="Sortie" EntitySet="Sortie" />
+            <End Role="EtatStock" EntitySet="EtatStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facture_Client" Association="Self.FK_Facture_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Facture" EntitySet="Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ligne_Facture_Facture" Association="Self.FK_Ligne_Facture_Facture">
+            <End Role="Facture" EntitySet="Facture" />
+            <End Role="Ligne_Facture" EntitySet="Ligne_Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ligne_Facture_Produit" Association="Self.FK_Ligne_Facture_Produit">
+            <End Role="Produit" EntitySet="Produit" />
+            <End Role="Ligne_Facture" EntitySet="Ligne_Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ligne_Sortie_Produit" Association="Self.FK_Ligne_Sortie_Produit">
+            <End Role="Produit" EntitySet="Produit" />
+            <End Role="Ligne_Sortie" EntitySet="Ligne_Sortie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ligne_Sortie_Sortie" Association="Self.FK_Ligne_Sortie_Sortie">
+            <End Role="Sortie" EntitySet="Sortie" />
+            <End Role="Ligne_Sortie" EntitySet="Ligne_Sortie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produit_Categorie" Association="Self.FK_Produit_Categorie">
+            <End Role="Categorie" EntitySet="Categorie" />
+            <End Role="Produit" EntitySet="Produit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produit_Fournisseur" Association="Self.FK_Produit_Fournisseur">
+            <End Role="Fournisseur" EntitySet="Fournisseur" />
+            <End Role="Produit" EntitySet="Produit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sortie_Client" Association="Self.FK_Sortie_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Sortie" EntitySet="Sortie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sortie_Produit" Association="Self.FK_Sortie_Produit">
+            <End Role="Produit" EntitySet="Produit" />
+            <End Role="Sortie" EntitySet="Sortie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjetPFAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dbStockContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="ProjetPFAModel.Categorie" />
+          <EntitySet Name="Clients" EntityType="ProjetPFAModel.Client" />
+          <EntitySet Name="CommandeClients" EntityType="ProjetPFAModel.CommandeClient" />
+          <EntitySet Name="Entrees" EntityType="ProjetPFAModel.Entree" />
+          <EntitySet Name="EtatStocks" EntityType="ProjetPFAModel.EtatStock" />
+          <EntitySet Name="Factures" EntityType="ProjetPFAModel.Facture" />
+          <EntitySet Name="Fournisseurs" EntityType="ProjetPFAModel.Fournisseur" />
+          <EntitySet Name="Ligne_Entree" EntityType="ProjetPFAModel.Ligne_Entree" />
+          <EntitySet Name="Ligne_Facture" EntityType="ProjetPFAModel.Ligne_Facture" />
+          <EntitySet Name="Produits" EntityType="ProjetPFAModel.Produit" />
+          <EntitySet Name="Sorties" EntityType="ProjetPFAModel.Sortie" />
+          <EntitySet Name="Utilisateurs" EntityType="ProjetPFAModel.Utilisateur" />
+          <AssociationSet Name="FK_Produit_Categorie" Association="ProjetPFAModel.FK_Produit_Categorie">
+            <End Role="Categorie" EntitySet="Categories" />
+            <End Role="Produit" EntitySet="Produits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommandeClient_Client" Association="ProjetPFAModel.FK_CommandeClient_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="CommandeClient" EntitySet="CommandeClients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facture_Client" Association="ProjetPFAModel.FK_Facture_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Facture" EntitySet="Factures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sortie_Client" Association="ProjetPFAModel.FK_Sortie_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Sortie" EntitySet="Sorties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entree_EtatStock" Association="ProjetPFAModel.FK_Entree_EtatStock">
+            <End Role="EtatStock" EntitySet="EtatStocks" />
+            <End Role="Entree" EntitySet="Entrees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entree_Fournisseur" Association="ProjetPFAModel.FK_Entree_Fournisseur">
+            <End Role="Fournisseur" EntitySet="Fournisseurs" />
+            <End Role="Entree" EntitySet="Entrees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entree_Produit" Association="ProjetPFAModel.FK_Entree_Produit">
+            <End Role="Produit" EntitySet="Produits" />
+            <End Role="Entree" EntitySet="Entrees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EtatStock_Entree" Association="ProjetPFAModel.FK_EtatStock_Entree">
+            <End Role="Entree" EntitySet="Entrees" />
+            <End Role="EtatStock" EntitySet="EtatStocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EtatStock_Produit" Association="ProjetPFAModel.FK_EtatStock_Produit">
+            <End Role="Produit" EntitySet="Produits" />
+            <End Role="EtatStock" EntitySet="EtatStocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EtatStock_Sortie" Association="ProjetPFAModel.FK_EtatStock_Sortie">
+            <End Role="Sortie" EntitySet="Sorties" />
+            <End Role="EtatStock" EntitySet="EtatStocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ligne_Facture_Facture" Association="ProjetPFAModel.FK_Ligne_Facture_Facture">
+            <End Role="Facture" EntitySet="Factures" />
+            <End Role="Ligne_Facture" EntitySet="Ligne_Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produit_Fournisseur" Association="ProjetPFAModel.FK_Produit_Fournisseur">
+            <End Role="Fournisseur" EntitySet="Fournisseurs" />
+            <End Role="Produit" EntitySet="Produits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ligne_Facture_Produit" Association="ProjetPFAModel.FK_Ligne_Facture_Produit">
+            <End Role="Produit" EntitySet="Produits" />
+            <End Role="Ligne_Facture" EntitySet="Ligne_Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sortie_Produit" Association="ProjetPFAModel.FK_Sortie_Produit">
+            <End Role="Produit" EntitySet="Produits" />
+            <End Role="Sortie" EntitySet="Sorties" />
+          </AssociationSet>
+          <AssociationSet Name="Ligne_Sortie" Association="ProjetPFAModel.Ligne_Sortie">
+            <End Role="Produit" EntitySet="Produits" />
+            <End Role="Sortie" EntitySet="Sorties" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="code_Categorie" />
+          </Key>
+          <Property Name="code_Categorie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_Categorie" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Produits" Relationship="ProjetPFAModel.FK_Produit_Categorie" FromRole="Categorie" ToRole="Produit" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="code_Client" />
+          </Key>
+          <Property Name="code_Client" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_Clt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prenom" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lieuNaissance_Clt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="adresse" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="adresseMail_Clt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="paysResidence_Clt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telephone_Clt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CommandeClients" Relationship="ProjetPFAModel.FK_CommandeClient_Client" FromRole="Client" ToRole="CommandeClient" />
+          <NavigationProperty Name="Factures" Relationship="ProjetPFAModel.FK_Facture_Client" FromRole="Client" ToRole="Facture" />
+          <NavigationProperty Name="Sorties" Relationship="ProjetPFAModel.FK_Sortie_Client" FromRole="Client" ToRole="Sortie" />
+        </EntityType>
+        <EntityType Name="CommandeClient">
+          <Key>
+            <PropertyRef Name="code_Commande_Client" />
+          </Key>
+          <Property Name="code_Commande_Client" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code_Client" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="ProjetPFAModel.FK_CommandeClient_Client" FromRole="CommandeClient" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Entree">
+          <Key>
+            <PropertyRef Name="code_Entree" />
+          </Key>
+          <Property Name="code_Entree" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code_Produit" Type="Int32" Nullable="false" />
+          <Property Name="code_Stock" Type="Int32" Nullable="false" />
+          <Property Name="code_Fournisseur" Type="Int32" Nullable="false" />
+          <Property Name="nom_Entree" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="qte_Entree" Type="Int32" Nullable="false" />
+          <Property Name="total" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EtatStock" Relationship="ProjetPFAModel.FK_Entree_EtatStock" FromRole="Entree" ToRole="EtatStock" />
+          <NavigationProperty Name="Fournisseur" Relationship="ProjetPFAModel.FK_Entree_Fournisseur" FromRole="Entree" ToRole="Fournisseur" />
+          <NavigationProperty Name="Produit" Relationship="ProjetPFAModel.FK_Entree_Produit" FromRole="Entree" ToRole="Produit" />
+          <NavigationProperty Name="EtatStocks" Relationship="ProjetPFAModel.FK_EtatStock_Entree" FromRole="Entree" ToRole="EtatStock" />
+        </EntityType>
+        <EntityType Name="EtatStock">
+          <Key>
+            <PropertyRef Name="code_Stock" />
+          </Key>
+          <Property Name="code_Stock" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code_Entree" Type="Int32" Nullable="false" />
+          <Property Name="code_Sortie" Type="Int32" Nullable="false" />
+          <Property Name="code_Produit" Type="Int32" Nullable="false" />
+          <Property Name="qteEnStock" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Entrees" Relationship="ProjetPFAModel.FK_Entree_EtatStock" FromRole="EtatStock" ToRole="Entree" />
+          <NavigationProperty Name="Entree" Relationship="ProjetPFAModel.FK_EtatStock_Entree" FromRole="EtatStock" ToRole="Entree" />
+          <NavigationProperty Name="Produit" Relationship="ProjetPFAModel.FK_EtatStock_Produit" FromRole="EtatStock" ToRole="Produit" />
+          <NavigationProperty Name="Sortie" Relationship="ProjetPFAModel.FK_EtatStock_Sortie" FromRole="EtatStock" ToRole="Sortie" />
+        </EntityType>
+        <EntityType Name="Facture">
+          <Key>
+            <PropertyRef Name="code_Facture" />
+          </Key>
+          <Property Name="code_Facture" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code_Client" Type="Int32" Nullable="false" />
+          <Property Name="date_Facture" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="retenue" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="ProjetPFAModel.FK_Facture_Client" FromRole="Facture" ToRole="Client" />
+          <NavigationProperty Name="Ligne_Facture" Relationship="ProjetPFAModel.FK_Ligne_Facture_Facture" FromRole="Facture" ToRole="Ligne_Facture" />
+        </EntityType>
+        <EntityType Name="Fournisseur">
+          <Key>
+            <PropertyRef Name="code_Fournisseur" />
+          </Key>
+          <Property Name="code_Fournisseur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_Fournisseur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prenom_Fournisseur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="adresse_Fournisseur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pays_Fournisseur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telephone_Founisseur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Entrees" Relationship="ProjetPFAModel.FK_Entree_Fournisseur" FromRole="Fournisseur" ToRole="Entree" />
+          <NavigationProperty Name="Produits" Relationship="ProjetPFAModel.FK_Produit_Fournisseur" FromRole="Fournisseur" ToRole="Produit" />
+        </EntityType>
+        <EntityType Name="Ligne_Entree">
+          <Key>
+            <PropertyRef Name="code_Ligne_Entree" />
+          </Key>
+          <Property Name="code_Ligne_Entree" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Ligne_Facture">
+          <Key>
+            <PropertyRef Name="code_Facture" />
+            <PropertyRef Name="code_Produit" />
+          </Key>
+          <Property Name="code_Facture" Type="Int64" Nullable="false" />
+          <Property Name="code_Produit" Type="Int32" Nullable="false" />
+          <Property Name="quantite" Type="Int32" />
+          <NavigationProperty Name="Facture" Relationship="ProjetPFAModel.FK_Ligne_Facture_Facture" FromRole="Ligne_Facture" ToRole="Facture" />
+          <NavigationProperty Name="Produit" Relationship="ProjetPFAModel.FK_Ligne_Facture_Produit" FromRole="Ligne_Facture" ToRole="Produit" />
+        </EntityType>
+        <EntityType Name="Produit">
+          <Key>
+            <PropertyRef Name="code_Produit" />
+          </Key>
+          <Property Name="code_Produit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code_Fournisseur" Type="Int32" Nullable="false" />
+          <Property Name="code_Categorie" Type="Int32" Nullable="false" />
+          <Property Name="nom_Produit" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="prixUnitaire" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="qteEnStock" Type="Int32" Nullable="false" />
+          <Property Name="image_Produit" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Categorie" Relationship="ProjetPFAModel.FK_Produit_Categorie" FromRole="Produit" ToRole="Categorie" />
+          <NavigationProperty Name="Entrees" Relationship="ProjetPFAModel.FK_Entree_Produit" FromRole="Produit" ToRole="Entree" />
+          <NavigationProperty Name="EtatStocks" Relationship="ProjetPFAModel.FK_EtatStock_Produit" FromRole="Produit" ToRole="EtatStock" />
+          <NavigationProperty Name="Fournisseur" Relationship="ProjetPFAModel.FK_Produit_Fournisseur" FromRole="Produit" ToRole="Fournisseur" />
+          <NavigationProperty Name="Ligne_Facture" Relationship="ProjetPFAModel.FK_Ligne_Facture_Produit" FromRole="Produit" ToRole="Ligne_Facture" />
+          <NavigationProperty Name="Sorties" Relationship="ProjetPFAModel.FK_Sortie_Produit" FromRole="Produit" ToRole="Sortie" />
+          <NavigationProperty Name="Sorties1" Relationship="ProjetPFAModel.Ligne_Sortie" FromRole="Produit" ToRole="Sortie" />
+        </EntityType>
+        <EntityType Name="Sortie">
+          <Key>
+            <PropertyRef Name="code_Sortie" />
+          </Key>
+          <Property Name="code_Sortie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code_Client" Type="Int32" Nullable="false" />
+          <Property Name="code_Produit" Type="Int32" Nullable="false" />
+          <Property Name="date_Commande" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="total_HT" Type="Int32" Nullable="false" />
+          <Property Name="TVA" Type="Double" Nullable="false" />
+          <Property Name="total_TTC" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="ProjetPFAModel.FK_Sortie_Client" FromRole="Sortie" ToRole="Client" />
+          <NavigationProperty Name="EtatStocks" Relationship="ProjetPFAModel.FK_EtatStock_Sortie" FromRole="Sortie" ToRole="EtatStock" />
+          <NavigationProperty Name="Produit" Relationship="ProjetPFAModel.FK_Sortie_Produit" FromRole="Sortie" ToRole="Produit" />
+          <NavigationProperty Name="Produits" Relationship="ProjetPFAModel.Ligne_Sortie" FromRole="Sortie" ToRole="Produit" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="code_Utilisateur" />
+          </Key>
+          <Property Name="code_Utilisateur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prenom_Utilisateur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nom_Utilisateur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dateNaissance_Utilisateur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lieuNaissance_Utilisateur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nationalite_Utilisateur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="numero_CNI" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pays_Utilisateur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="quartier_Utilisateur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telephone_Utilisateur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="username_Utilisateur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password_Utilisateur" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Produit_Categorie">
+          <End Type="ProjetPFAModel.Categorie" Role="Categorie" Multiplicity="1" />
+          <End Type="ProjetPFAModel.Produit" Role="Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="code_Categorie" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="code_Categorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommandeClient_Client">
+          <End Type="ProjetPFAModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="ProjetPFAModel.CommandeClient" Role="CommandeClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="code_Client" />
+            </Principal>
+            <Dependent Role="CommandeClient">
+              <PropertyRef Name="code_Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facture_Client">
+          <End Type="ProjetPFAModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="ProjetPFAModel.Facture" Role="Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="code_Client" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="code_Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sortie_Client">
+          <End Type="ProjetPFAModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="ProjetPFAModel.Sortie" Role="Sortie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="code_Client" />
+            </Principal>
+            <Dependent Role="Sortie">
+              <PropertyRef Name="code_Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entree_EtatStock">
+          <End Type="ProjetPFAModel.EtatStock" Role="EtatStock" Multiplicity="1" />
+          <End Type="ProjetPFAModel.Entree" Role="Entree" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EtatStock">
+              <PropertyRef Name="code_Stock" />
+            </Principal>
+            <Dependent Role="Entree">
+              <PropertyRef Name="code_Stock" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entree_Fournisseur">
+          <End Type="ProjetPFAModel.Fournisseur" Role="Fournisseur" Multiplicity="1" />
+          <End Type="ProjetPFAModel.Entree" Role="Entree" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fournisseur">
+              <PropertyRef Name="code_Fournisseur" />
+            </Principal>
+            <Dependent Role="Entree">
+              <PropertyRef Name="code_Fournisseur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entree_Produit">
+          <End Type="ProjetPFAModel.Produit" Role="Produit" Multiplicity="1" />
+          <End Type="ProjetPFAModel.Entree" Role="Entree" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="code_Produit" />
+            </Principal>
+            <Dependent Role="Entree">
+              <PropertyRef Name="code_Produit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EtatStock_Entree">
+          <End Type="ProjetPFAModel.Entree" Role="Entree" Multiplicity="1" />
+          <End Type="ProjetPFAModel.EtatStock" Role="EtatStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entree">
+              <PropertyRef Name="code_Entree" />
+            </Principal>
+            <Dependent Role="EtatStock">
+              <PropertyRef Name="code_Entree" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EtatStock_Produit">
+          <End Type="ProjetPFAModel.Produit" Role="Produit" Multiplicity="1" />
+          <End Type="ProjetPFAModel.EtatStock" Role="EtatStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="code_Produit" />
+            </Principal>
+            <Dependent Role="EtatStock">
+              <PropertyRef Name="code_Produit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EtatStock_Sortie">
+          <End Type="ProjetPFAModel.Sortie" Role="Sortie" Multiplicity="1" />
+          <End Type="ProjetPFAModel.EtatStock" Role="EtatStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sortie">
+              <PropertyRef Name="code_Sortie" />
+            </Principal>
+            <Dependent Role="EtatStock">
+              <PropertyRef Name="code_Sortie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ligne_Facture_Facture">
+          <End Type="ProjetPFAModel.Facture" Role="Facture" Multiplicity="1" />
+          <End Type="ProjetPFAModel.Ligne_Facture" Role="Ligne_Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facture">
+              <PropertyRef Name="code_Facture" />
+            </Principal>
+            <Dependent Role="Ligne_Facture">
+              <PropertyRef Name="code_Facture" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produit_Fournisseur">
+          <End Type="ProjetPFAModel.Fournisseur" Role="Fournisseur" Multiplicity="1" />
+          <End Type="ProjetPFAModel.Produit" Role="Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fournisseur">
+              <PropertyRef Name="code_Fournisseur" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="code_Fournisseur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ligne_Facture_Produit">
+          <End Type="ProjetPFAModel.Produit" Role="Produit" Multiplicity="1" />
+          <End Type="ProjetPFAModel.Ligne_Facture" Role="Ligne_Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="code_Produit" />
+            </Principal>
+            <Dependent Role="Ligne_Facture">
+              <PropertyRef Name="code_Produit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sortie_Produit">
+          <End Type="ProjetPFAModel.Produit" Role="Produit" Multiplicity="1" />
+          <End Type="ProjetPFAModel.Sortie" Role="Sortie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="code_Produit" />
+            </Principal>
+            <Dependent Role="Sortie">
+              <PropertyRef Name="code_Produit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Ligne_Sortie">
+          <End Type="ProjetPFAModel.Produit" Role="Produit" Multiplicity="*" />
+          <End Type="ProjetPFAModel.Sortie" Role="Sortie" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjetPFAModelStoreContainer" CdmEntityContainer="dbStockContext">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="ProjetPFAModel.Categorie">
+              <MappingFragment StoreEntitySet="Categorie">
+                <ScalarProperty Name="nom_Categorie" ColumnName="nom_Categorie" />
+                <ScalarProperty Name="code_Categorie" ColumnName="code_Categorie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="ProjetPFAModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="telephone_Clt" ColumnName="telephone_Clt" />
+                <ScalarProperty Name="paysResidence_Clt" ColumnName="paysResidence_Clt" />
+                <ScalarProperty Name="adresseMail_Clt" ColumnName="adresseMail_Clt" />
+                <ScalarProperty Name="adresse" ColumnName="adresse" />
+                <ScalarProperty Name="lieuNaissance_Clt" ColumnName="lieuNaissance_Clt" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="nom_Clt" ColumnName="nom_Clt" />
+                <ScalarProperty Name="code_Client" ColumnName="code_Client" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommandeClients">
+            <EntityTypeMapping TypeName="ProjetPFAModel.CommandeClient">
+              <MappingFragment StoreEntitySet="CommandeClient">
+                <ScalarProperty Name="code_Client" ColumnName="code_Client" />
+                <ScalarProperty Name="code_Commande_Client" ColumnName="code_Commande_Client" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entrees">
+            <EntityTypeMapping TypeName="ProjetPFAModel.Entree">
+              <MappingFragment StoreEntitySet="Entree">
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="qte_Entree" ColumnName="qte_Entree" />
+                <ScalarProperty Name="nom_Entree" ColumnName="nom_Entree" />
+                <ScalarProperty Name="code_Fournisseur" ColumnName="code_Fournisseur" />
+                <ScalarProperty Name="code_Stock" ColumnName="code_Stock" />
+                <ScalarProperty Name="code_Produit" ColumnName="code_Produit" />
+                <ScalarProperty Name="code_Entree" ColumnName="code_Entree" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EtatStocks">
+            <EntityTypeMapping TypeName="ProjetPFAModel.EtatStock">
+              <MappingFragment StoreEntitySet="EtatStock">
+                <ScalarProperty Name="qteEnStock" ColumnName="qteEnStock" />
+                <ScalarProperty Name="code_Produit" ColumnName="code_Produit" />
+                <ScalarProperty Name="code_Sortie" ColumnName="code_Sortie" />
+                <ScalarProperty Name="code_Entree" ColumnName="code_Entree" />
+                <ScalarProperty Name="code_Stock" ColumnName="code_Stock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Factures">
+            <EntityTypeMapping TypeName="ProjetPFAModel.Facture">
+              <MappingFragment StoreEntitySet="Facture">
+                <ScalarProperty Name="retenue" ColumnName="retenue" />
+                <ScalarProperty Name="date_Facture" ColumnName="date_Facture" />
+                <ScalarProperty Name="code_Client" ColumnName="code_Client" />
+                <ScalarProperty Name="code_Facture" ColumnName="code_Facture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fournisseurs">
+            <EntityTypeMapping TypeName="ProjetPFAModel.Fournisseur">
+              <MappingFragment StoreEntitySet="Fournisseur">
+                <ScalarProperty Name="telephone_Founisseur" ColumnName="telephone_Founisseur" />
+                <ScalarProperty Name="pays_Fournisseur" ColumnName="pays_Fournisseur" />
+                <ScalarProperty Name="adresse_Fournisseur" ColumnName="adresse_Fournisseur" />
+                <ScalarProperty Name="prenom_Fournisseur" ColumnName="prenom_Fournisseur" />
+                <ScalarProperty Name="nom_Fournisseur" ColumnName="nom_Fournisseur" />
+                <ScalarProperty Name="code_Fournisseur" ColumnName="code_Fournisseur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ligne_Entree">
+            <EntityTypeMapping TypeName="ProjetPFAModel.Ligne_Entree">
+              <MappingFragment StoreEntitySet="Ligne_Entree">
+                <ScalarProperty Name="code_Ligne_Entree" ColumnName="code_Ligne_Entree" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ligne_Facture">
+            <EntityTypeMapping TypeName="ProjetPFAModel.Ligne_Facture">
+              <MappingFragment StoreEntitySet="Ligne_Facture">
+                <ScalarProperty Name="quantite" ColumnName="quantite" />
+                <ScalarProperty Name="code_Produit" ColumnName="code_Produit" />
+                <ScalarProperty Name="code_Facture" ColumnName="code_Facture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produits">
+            <EntityTypeMapping TypeName="ProjetPFAModel.Produit">
+              <MappingFragment StoreEntitySet="Produit">
+                <ScalarProperty Name="image_Produit" ColumnName="image_Produit" />
+                <ScalarProperty Name="qteEnStock" ColumnName="qteEnStock" />
+                <ScalarProperty Name="prixUnitaire" ColumnName="prixUnitaire" />
+                <ScalarProperty Name="nom_Produit" ColumnName="nom_Produit" />
+                <ScalarProperty Name="code_Categorie" ColumnName="code_Categorie" />
+                <ScalarProperty Name="code_Fournisseur" ColumnName="code_Fournisseur" />
+                <ScalarProperty Name="code_Produit" ColumnName="code_Produit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sorties">
+            <EntityTypeMapping TypeName="ProjetPFAModel.Sortie">
+              <MappingFragment StoreEntitySet="Sortie">
+                <ScalarProperty Name="total_TTC" ColumnName="total_TTC" />
+                <ScalarProperty Name="TVA" ColumnName="TVA" />
+                <ScalarProperty Name="total_HT" ColumnName="total_HT" />
+                <ScalarProperty Name="date_Commande" ColumnName="date_Commande" />
+                <ScalarProperty Name="code_Produit" ColumnName="code_Produit" />
+                <ScalarProperty Name="code_Client" ColumnName="code_Client" />
+                <ScalarProperty Name="code_Sortie" ColumnName="code_Sortie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utilisateurs">
+            <EntityTypeMapping TypeName="ProjetPFAModel.Utilisateur">
+              <MappingFragment StoreEntitySet="Utilisateur">
+                <ScalarProperty Name="password_Utilisateur" ColumnName="password_Utilisateur" />
+                <ScalarProperty Name="username_Utilisateur" ColumnName="username_Utilisateur" />
+                <ScalarProperty Name="telephone_Utilisateur" ColumnName="telephone_Utilisateur" />
+                <ScalarProperty Name="quartier_Utilisateur" ColumnName="quartier_Utilisateur" />
+                <ScalarProperty Name="pays_Utilisateur" ColumnName="pays_Utilisateur" />
+                <ScalarProperty Name="numero_CNI" ColumnName="numero_CNI" />
+                <ScalarProperty Name="nationalite_Utilisateur" ColumnName="nationalite_Utilisateur" />
+                <ScalarProperty Name="lieuNaissance_Utilisateur" ColumnName="lieuNaissance_Utilisateur" />
+                <ScalarProperty Name="dateNaissance_Utilisateur" ColumnName="dateNaissance_Utilisateur" />
+                <ScalarProperty Name="nom_Utilisateur" ColumnName="nom_Utilisateur" />
+                <ScalarProperty Name="prenom_Utilisateur" ColumnName="prenom_Utilisateur" />
+                <ScalarProperty Name="code_Utilisateur" ColumnName="code_Utilisateur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Ligne_Sortie" TypeName="ProjetPFAModel.Ligne_Sortie" StoreEntitySet="Ligne_Sortie">
+            <EndProperty Name="Sortie">
+              <ScalarProperty Name="code_Sortie" ColumnName="code_Sortie" />
+            </EndProperty>
+            <EndProperty Name="Produit">
+              <ScalarProperty Name="code_Produit" ColumnName="code_Produit" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

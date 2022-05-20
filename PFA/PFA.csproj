@@ -1,0 +1,527 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A01A0BE3-535D-47EB-904C-55EA9CE7701B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PFA</RootNamespace>
+    <AssemblyName>PFA</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.140.1000.523\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Categorie.cs">
+      <DependentUpon>DbStock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Classe\Cls_Client.cs" />
+    <Compile Include="Classe\CLS_Connexion.cs" />
+    <Compile Include="Classe\CLS_Produit.cs" />
+    <Compile Include="Client.cs">
+      <DependentUpon>DbStock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommandeClient.cs">
+      <DependentUpon>DbStock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbStock.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbStock.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbStock.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbStock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbStock.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbStock.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entree.cs">
+      <DependentUpon>DbStock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EtatStock.cs">
+      <DependentUpon>DbStock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Facture.cs">
+      <DependentUpon>DbStock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Formulaire\FRM_Ajouter_Modifier_Client.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formulaire\FRM_Ajouter_Modifier_Client.Designer.cs">
+      <DependentUpon>FRM_Ajouter_Modifier_Client.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formulaire\FRM_Ajouter_Modifier_Produit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formulaire\FRM_Ajouter_Modifier_Produit.Designer.cs">
+      <DependentUpon>FRM_Ajouter_Modifier_Produit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formulaire\FRM_Connexion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formulaire\FRM_Connexion.Designer.cs">
+      <DependentUpon>FRM_Connexion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formulaire\Frm_Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formulaire\Frm_Menu.Designer.cs">
+      <DependentUpon>Frm_Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formulaire\FRM_Photo_Produit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formulaire\FRM_Photo_Produit.Designer.cs">
+      <DependentUpon>FRM_Photo_Produit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formulaire\User_Liste_Client.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formulaire\User_Liste_Client.Designer.cs">
+      <DependentUpon>User_Liste_Client.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formulaire\User_Liste_Produit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formulaire\User_Liste_Produit.Designer.cs">
+      <DependentUpon>User_Liste_Produit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fournisseur.cs">
+      <DependentUpon>DbStock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ligne_Entree.cs">
+      <DependentUpon>DbStock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ligne_Facture.cs">
+      <DependentUpon>DbStock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Produit.cs">
+      <DependentUpon>DbStock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="ProjetPFADataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjetPFADataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RAP\FRM_RAPPORT.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RAP\FRM_RAPPORT.Designer.cs">
+      <DependentUpon>FRM_RAPPORT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sortie.cs">
+      <DependentUpon>DbStock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="Utilisateur.cs">
+      <DependentUpon>DbStock.tt</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Formulaire\FRM_Ajouter_Modifier_Client.resx">
+      <DependentUpon>FRM_Ajouter_Modifier_Client.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formulaire\FRM_Ajouter_Modifier_Produit.resx">
+      <DependentUpon>FRM_Ajouter_Modifier_Produit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formulaire\FRM_Connexion.resx">
+      <DependentUpon>FRM_Connexion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formulaire\Frm_Menu.resx">
+      <DependentUpon>Frm_Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formulaire\FRM_Photo_Produit.resx">
+      <DependentUpon>FRM_Photo_Produit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formulaire\User_Liste_Client.resx">
+      <DependentUpon>User_Liste_Client.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formulaire\User_Liste_Produit.resx">
+      <DependentUpon>User_Liste_Produit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="RAP\FRM_RAPPORT.resx">
+      <DependentUpon>FRM_RAPPORT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EntityDeploy Include="DbStock.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DbStock.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DbStock.edmx.diagram">
+      <DependentUpon>DbStock.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="ProjetPFADataSet.xsc">
+      <DependentUpon>ProjetPFADataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ProjetPFADataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProjetPFADataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ProjetPFADataSet.xss">
+      <DependentUpon>ProjetPFADataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DbStock.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DbStock.Context.cs</LastGenOutput>
+      <DependentUpon>DbStock.edmx</DependentUpon>
+    </Content>
+    <Content Include="DbStock.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DbStock.edmx</DependentUpon>
+      <LastGenOutput>DbStock.cs</LastGenOutput>
+    </Content>
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\used-product.png" />
+    <None Include="Resources\used-product %281%29.png" />
+    <None Include="Resources\supplier.png" />
+    <None Include="Resources\supplier %281%29.png" />
+    <None Include="Resources\procurement.png" />
+    <None Include="Resources\procurement %281%29.png" />
+    <None Include="Resources\packaging.png" />
+    <None Include="Resources\order-on-the-way.png" />
+    <None Include="Resources\icons8-grocery-shelf-24.png" />
+    <None Include="Resources\icons8-fournisseur-24.png" />
+    <None Include="Resources\grocery-bag.png" />
+    <None Include="Resources\delivered-box.png" />
+    <None Include="Resources\data-provider.png" />
+    <None Include="Resources\cost.png" />
+    <None Include="Resources\cost %281%29.png" />
+    <None Include="Resources\best-seller.png" />
+    <None Include="Resources\bbb.png" />
+    <None Include="Resources\barcode.png" />
+    <None Include="Resources\print %283%29.png" />
+    <None Include="Resources\print %282%29.png" />
+    <None Include="Resources\save.png" />
+    <None Include="Resources\save %282%29.png" />
+    <None Include="Resources\save %281%29.png" />
+    <None Include="Resources\print--v2.gif" />
+    <None Include="Resources\print1.png" />
+    <None Include="Resources\print %281%29.png" />
+    <None Include="Resources\ms-excel.png" />
+    <None Include="Resources\ms-excel %282%29.png" />
+    <None Include="Resources\ms-excel %281%29.png" />
+    <None Include="Resources\external-print-user-interface-tanah-basah-glyph-tanah-basah.png" />
+    <None Include="Resources\print.png" />
+    <None Include="Resources\upload-2--v21.gif" />
+    <None Include="Resources\synchronize--v11.png" />
+    <None Include="Resources\settings--v11.png" />
+    <None Include="Resources\services--v11.png" />
+    <None Include="Resources\restart--v11.png" />
+    <None Include="Resources\process--v2.gif" />
+    <None Include="Resources\process.png" />
+    <None Include="Resources\process %283%29.png" />
+    <None Include="Resources\process %282%29.png" />
+    <None Include="Resources\process %281%29.png" />
+    <None Include="Resources\picture.png" />
+    <None Include="Resources\picture %286%29.png" />
+    <None Include="Resources\picture %285%29.png" />
+    <None Include="Resources\picture %284%29.png" />
+    <None Include="Resources\picture %283%29.png" />
+    <None Include="Resources\picture %282%29.png" />
+    <None Include="Resources\picture %281%29.png" />
+    <None Include="Resources\phone-contact.png" />
+    <None Include="Resources\external-picture-essentials-tanah-basah-glyph-tanah-basah-2.png" />
+    <None Include="Resources\email-sign1.png" />
+    <None Include="Resources\email1.png" />
+    <None Include="Resources\upload-2--v2.gif" />
+    <None Include="Resources\synchronize--v1.png" />
+    <None Include="Resources\settings--v1.png" />
+    <None Include="Resources\services--v1.png" />
+    <None Include="Resources\restart--v1.png" />
+    <None Include="Resources\plus--v12.png" />
+    <None Include="Resources\info--v1.png" />
+    <None Include="Resources\icons8-cliquer-et-recevoir-48.png" />
+    <None Include="Resources\icons8-accueil-48.png" />
+    <None Include="Resources\email-sign.png" />
+    <None Include="Resources\email.png" />
+    <None Include="Resources\edit--v1.png" />
+    <None Include="Resources\downloading-updates.png" />
+    <None Include="Resources\download-2--v3.gif" />
+    <None Include="Resources\download-2--v1.png" />
+    <None Include="Resources\delete-sign--v1.png" />
+    <None Include="Resources\delete.png" />
+    <None Include="Resources\cancel--v11.png" />
+    <None Include="Resources\cancel-2--v1.png" />
+    <None Include="Resources\buy--v2.gif" />
+    <None Include="Resources\buy.png" />
+    <None Include="Resources\available-updates.png" />
+    <None Include="Resources\approve-and-update.png" />
+    <None Include="Resources\add-user-male2.png" />
+    <None Include="Resources\add-user-group-woman-woman.png" />
+    <None Include="Resources\add-user-group-man-man.png" />
+    <None Include="Resources\add-shopping-cart--v2.gif" />
+    <None Include="Resources\user-male-circle1.png" />
+    <None Include="Resources\user-male1.png" />
+    <None Include="Resources\user2.png" />
+    <None Include="Resources\upload-21.png" />
+    <None Include="Resources\twitter1.png" />
+    <None Include="Resources\test-account2.png" />
+    <None Include="Resources\support1.png" />
+    <None Include="Resources\shopping-cart1.png" />
+    <None Include="Resources\shopping-basket1.png" />
+    <None Include="Resources\settings1.png" />
+    <None Include="Resources\purchase-order1.png" />
+    <None Include="Resources\product1.png" />
+    <None Include="Resources\positive-dynamic1.png" />
+    <None Include="Resources\plus--v11.png" />
+    <None Include="Resources\plus1.png" />
+    <None Include="Resources\online-payment-with-a-credit-card1.png" />
+    <None Include="Resources\online-payment-1.png" />
+    <None Include="Resources\ok1.png" />
+    <None Include="Resources\maximize-window1.png" />
+    <None Include="Resources\manager1.png" />
+    <None Include="Resources\lock--v11.png" />
+    <None Include="Resources\linkedin1.png" />
+    <None Include="Resources\in-transit1.png" />
+    <None Include="Resources\instagram-new1.png" />
+    <None Include="Resources\info1.png" />
+    <None Include="Resources\icons8-télécharger-depuis-le-cloud-481.png" />
+    <None Include="Resources\icons8-panneau-de-contrôle-301.png" />
+    <None Include="Resources\icons8-modifier-l%27utilisateur-homme-301.png" />
+    <None Include="Resources\icons8-menu-cerclé-481.png" />
+    <None Include="Resources\icons8-livraison-301.png" />
+    <None Include="Resources\icons8-homme-d%27affaire-301.png" />
+    <None Include="Resources\icons8-graphique-combiné-301.png" />
+    <None Include="Resources\icons8-fournisseur-301.png" />
+    <None Include="Resources\icons8-facture-301.png" />
+    <None Include="Resources\icons8-a-faire-301.png" />
+    <None Include="Resources\horizontal-settings-mixer--v11.png" />
+    <None Include="Resources\home--v51.png" />
+    <None Include="Resources\google-plus1.png" />
+    <None Include="Resources\first1.png" />
+    <None Include="Resources\facebook-new1.png" />
+    <None Include="Resources\doughnut-chart1.png" />
+    <None Include="Resources\close-window2.png" />
+    <None Include="Resources\cancel1.png" />
+    <None Include="Resources\backspace1.png" />
+    <None Include="Resources\add-user-male1.png" />
+    <None Include="Resources\add-user-female1.png" />
+    <None Include="Resources\user-male-circle.png" />
+    <None Include="Resources\user-male.png" />
+    <None Include="Resources\user1.png" />
+    <None Include="Resources\upload-2.png" />
+    <None Include="Resources\twitter.png" />
+    <None Include="Resources\test-account1.png" />
+    <None Include="Resources\support.png" />
+    <None Include="Resources\shopping-cart.png" />
+    <None Include="Resources\shopping-basket.png" />
+    <None Include="Resources\settings.png" />
+    <None Include="Resources\purchase-order.png" />
+    <None Include="Resources\product.png" />
+    <None Include="Resources\positive-dynamic.png" />
+    <None Include="Resources\plus--v1.png" />
+    <None Include="Resources\plus.png" />
+    <None Include="Resources\online-payment-with-a-credit-card.png" />
+    <None Include="Resources\online-payment-.png" />
+    <None Include="Resources\ok.png" />
+    <None Include="Resources\maximize-window.png" />
+    <None Include="Resources\manager.png" />
+    <None Include="Resources\lock--v1.png" />
+    <None Include="Resources\linkedin.png" />
+    <None Include="Resources\in-transit.png" />
+    <None Include="Resources\instagram-new.png" />
+    <None Include="Resources\info.png" />
+    <None Include="Resources\icons8-télécharger-depuis-le-cloud-48.png" />
+    <None Include="Resources\icons8-panneau-de-contrôle-30.png" />
+    <None Include="Resources\icons8-modifier-l%27utilisateur-homme-30.png" />
+    <None Include="Resources\icons8-menu-cerclé-48.png" />
+    <None Include="Resources\icons8-livraison-30.png" />
+    <None Include="Resources\icons8-homme-d%27affaire-30.png" />
+    <None Include="Resources\icons8-graphique-combiné-30.png" />
+    <None Include="Resources\icons8-fournisseur-30.png" />
+    <None Include="Resources\icons8-facture-30.png" />
+    <None Include="Resources\icons8-a-faire-30.png" />
+    <None Include="Resources\horizontal-settings-mixer--v1.png" />
+    <None Include="Resources\home--v5.png" />
+    <None Include="Resources\google-plus.png" />
+    <None Include="Resources\first.png" />
+    <None Include="Resources\facebook-new.png" />
+    <None Include="Resources\doughnut-chart.png" />
+    <None Include="Resources\close-window1.png" />
+    <None Include="Resources\cancel.png" />
+    <None Include="Resources\backspace.png" />
+    <None Include="Resources\add-user-male.png" />
+    <None Include="Resources\add-user-female.png" />
+    <None Include="Resources\minus.png" />
+    <None Include="Resources\logout-rounded-left--v22.png" />
+    <None Include="Resources\logout-rounded-down1.png" />
+    <None Include="Resources\login-rounded-right1.png" />
+    <None Include="Resources\login-rounded-right %282%29.png" />
+    <None Include="Resources\login-rounded-right %281%29.png" />
+    <None Include="Resources\login-rounded.png" />
+    <None Include="Resources\login-rounded %281%29.png" />
+    <None Include="Resources\icons8-fermer-16.png" />
+    <None Include="Resources\icons8-déconnexion-161.png" />
+    <None Include="Resources\icons8-connexion-161.png" />
+    <None Include="Resources\icons8-bouton-d&amp;#39%3barrêt-48.png" />
+    <None Include="Resources\shutdown--v3.gif" />
+    <None Include="Resources\shutdown.png" />
+    <None Include="Resources\shutdown %282%29.png" />
+    <None Include="Resources\shutdown %281%29.png" />
+    <None Include="Resources\exit %281%29.png" />
+    <None Include="Resources\logout-rounded-left--v21.png" />
+    <None Include="Resources\logout-rounded-down.png" />
+    <None Include="Resources\login-rounded-right.png" />
+    <None Include="Resources\icons8-moins-2-mathématique-24.png" />
+    <None Include="Resources\icons8-menu-vertical-16.png" />
+    <None Include="Resources\menu-squared-21.png" />
+    <None Include="Resources\menu %285%29.png" />
+    <None Include="Resources\menu %284%29.png" />
+    <None Include="Resources\menu %283%29.png" />
+    <None Include="Resources\external-menu-multimedia-kiranshastry-gradient-kiranshastry.png" />
+    <None Include="Resources\squared-menu.png" />
+    <None Include="Resources\menu-squared-2.png" />
+    <None Include="Resources\menu-rounded.png" />
+    <None Include="Resources\menu %282%29.png" />
+    <None Include="Resources\menu %281%29.png" />
+    <None Include="Resources\minus-2-math.png" />
+    <None Include="Resources\external-power-user-interface-tanah-basah-detailed-outline-tanah-basah.png" />
+    <None Include="Resources\user.png" />
+    <None Include="Resources\password.png" />
+    <None Include="Resources\password %284%29.png" />
+    <None Include="Resources\password %283%29.png" />
+    <None Include="Resources\password %282%29.png" />
+    <None Include="Resources\password %281%29.png" />
+    <None Include="Resources\icons8-utilisateur-30.png" />
+    <None Include="Resources\icons8-utilisateur-16.png" />
+    <None Include="Resources\external-setting-user-interface-filled-line-filled-line-kendis-lasman.png" />
+    <None Include="Resources\external-setting-notifications-justicon-flat-justicon.png" />
+    <None Include="Resources\external-setting-essentials-tanah-basah-basic-outline-tanah-basah.png" />
+    <None Include="Resources\external-setting-basic-ui-elements-flatart-icons-outline-flatarticons.png" />
+    <None Include="Resources\external-Setting-basic-modern-lines-kalash.png" />
+    <None Include="Resources\administrator-male--v11.png" />
+    <None Include="Resources\experimental-delete-sign-tiny-color.png" />
+    <None Include="Resources\delete-sign.png" />
+    <None Include="Resources\vertical-settings-mixer.png" />
+    <None Include="Resources\test-account.png" />
+    <None Include="Resources\menu--v1.png" />
+    <None Include="Resources\menu.png" />
+    <None Include="Resources\logout-rounded-left--v2.png" />
+    <None Include="Resources\icons8-déconnexion-16.png" />
+    <None Include="Resources\icons8-connexion-16.png" />
+    <None Include="Resources\icons8-cadenas-24.png" />
+    <None Include="Resources\icons8-ajouter-aux-favoris-16.png" />
+    <None Include="Resources\icons8-ajouter-16.png" />
+    <None Include="Resources\four-squares.png" />
+    <None Include="Resources\exit.png" />
+    <None Include="Resources\download--v1.png" />
+    <None Include="Resources\dashboard-layout.png" />
+    <None Include="Resources\close-window.png" />
+    <None Include="Resources\cancel--v3.gif" />
+    <None Include="Resources\cancel--v1.png" />
+    <None Include="Resources\administrator-male--v1.png" />
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

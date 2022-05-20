@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="42724a7088d84998a4f76485d3c914be" Name="Diagram1">
+        <EntityTypeShape EntityType="ProjetPFAModel.Categorie" Width="1.5" PointX="3.75" PointY="1.5" />
+        <EntityTypeShape EntityType="ProjetPFAModel.Client" Width="1.5" PointX="6" PointY="9.25" />
+        <EntityTypeShape EntityType="ProjetPFAModel.CommandeClient" Width="1.5" PointX="8.25" PointY="13" />
+        <EntityTypeShape EntityType="ProjetPFAModel.Entree" Width="1.5" PointX="3" PointY="4.75" />
+        <EntityTypeShape EntityType="ProjetPFAModel.EtatStock" Width="1.5" PointX="8.25" PointY="5" />
+        <EntityTypeShape EntityType="ProjetPFAModel.Facture" Width="1.5" PointX="9" PointY="9.25" />
+        <EntityTypeShape EntityType="ProjetPFAModel.Fournisseur" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="ProjetPFAModel.Ligne_Entree" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="ProjetPFAModel.Ligne_Facture" Width="1.5" PointX="11.25" PointY="5.375" />
+        <EntityTypeShape EntityType="ProjetPFAModel.Produit" Width="1.5" PointX="6" PointY="4.5" />
+        <EntityTypeShape EntityType="ProjetPFAModel.Sortie" Width="1.5" PointX="8.25" PointY="0.75" />
+        <EntityTypeShape EntityType="ProjetPFAModel.Utilisateur" Width="1.5" PointX="0.75" PointY="8.875" />
+        <AssociationConnector Association="ProjetPFAModel.FK_Produit_Categorie" />
+        <AssociationConnector Association="ProjetPFAModel.FK_CommandeClient_Client" />
+        <AssociationConnector Association="ProjetPFAModel.FK_Facture_Client" />
+        <AssociationConnector Association="ProjetPFAModel.FK_Sortie_Client" />
+        <AssociationConnector Association="ProjetPFAModel.FK_Entree_EtatStock" />
+        <AssociationConnector Association="ProjetPFAModel.FK_Entree_Fournisseur" />
+        <AssociationConnector Association="ProjetPFAModel.FK_Entree_Produit" />
+        <AssociationConnector Association="ProjetPFAModel.FK_EtatStock_Entree" />
+        <AssociationConnector Association="ProjetPFAModel.FK_EtatStock_Produit" />
+        <AssociationConnector Association="ProjetPFAModel.FK_EtatStock_Sortie" />
+        <AssociationConnector Association="ProjetPFAModel.FK_Ligne_Facture_Facture" />
+        <AssociationConnector Association="ProjetPFAModel.FK_Produit_Fournisseur" />
+        <AssociationConnector Association="ProjetPFAModel.FK_Ligne_Facture_Produit" />
+        <AssociationConnector Association="ProjetPFAModel.FK_Sortie_Produit" />
+        <AssociationConnector Association="ProjetPFAModel.Ligne_Sortie" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
